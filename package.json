@@ -1,0 +1,38 @@
+{
+  "name": "padma",
+  "description": "A simple container for Node.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/zealic/node-padma",
+  "author": {
+    "name": "zealic",
+    "email": "zealic@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zealic/node-padma.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zealic/node-padma/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/zealic/node-padma/blob/master/LICENSE-MIT.txt"
+    }
+  ],
+  "main": "lib/padma",
+  "scripts": {
+    "test": "mocha"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "keywords": [
+    "container",
+    "service-container"
+  ],
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  }
+}
