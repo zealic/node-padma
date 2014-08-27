@@ -1,7 +1,7 @@
 {
   "name": "padma",
   "description": "A simple container for Node.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/zealic/node-padma",
   "author": {
     "name": "zealic",
@@ -34,5 +34,8 @@
   "devDependencies": {
     "chai": "^1.9.1",
     "mocha": "^1.21.4"
+  },
+  "dependencies": {
+    "q": "^1.0.1"
   }
 }
