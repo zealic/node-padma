@@ -52,4 +52,31 @@ describe('SimpleContainer', function() {
     };
     container.invoke(target).fail(done);
   });
+
+  it("invoke with local dependencies", function(done) {
+    var container = new SimpleContainer();
+
+    var target = function(hello, kill) {
+      hello.should.to.equal('world');
+      kill.should.to.equal('roshan');
+      done();
+    };
+    container.invoke(target, {
+      hello: 'world',
+      kill: 'roshan'
+    }).fail(done);
+  });
+
+  it("invoke with local overrided dependencies", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('kill', 'roshan');
+
+    var target = function(kill) {
+      kill.should.to.equal('Blade Master');
+      done();
+    };
+    container.invoke(target, {
+      kill: 'Blade Master'
+    }).fail(done);
+  });
 });
