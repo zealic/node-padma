@@ -39,4 +39,17 @@ describe('SimpleContainer', function() {
       done();
     }, done);
   });
+
+  it("invoke with dependencies", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('hello', 'world');
+    container.bindConstant('kill', 'roshan');
+
+    var target = function(hello, kill) {
+      hello.should.to.equal('world');
+      kill.should.to.equal('roshan');
+      done();
+    };
+    container.invoke(target).fail(done);
+  });
 });
