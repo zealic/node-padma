@@ -27,4 +27,16 @@ describe('SimpleContainer', function() {
       done();
     }, done);
   });
+
+  it("can resolve by array", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('hello', 'world');
+    container.bindConstant('kill', 'roshan');
+    container.get(['hello', 'kill']).then(function(data) {
+      data.should.be.an.Array;
+      data[0].should.to.equal('world');
+      data[1].should.to.equal('roshan');
+      done();
+    }, done);
+  });
 });
