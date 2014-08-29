@@ -79,4 +79,19 @@ describe('SimpleContainer', function() {
       kill: 'Blade Master'
     }).fail(done);
   });
+
+  it("try resolve dependencies", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('kill', 'roshan');
+
+    container.tryResolve('Bible').then(function(result) {
+      result.hasOwnProperty('Bible').should.be.false;
+    }).fail(done);
+
+    container.tryResolve(['kill', 'Bible']).then(function(result) {
+      result.hasOwnProperty('kill').should.be.true;
+      result.hasOwnProperty('Bible').should.be.false;
+      done();
+    }).fail(done);
+  });
 });
