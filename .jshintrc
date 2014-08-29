@@ -1,0 +1,35 @@
+/*
+Reference: http://www.jshint.com/docs/options/
+*/
+{
+  // Environment
+  "node": true,
+  "devel": true,
+  // Style
+  "indent": 2,
+  "maxdepth": 4,
+  "maxlen": 80,
+  // Rules
+  "curly": true,
+  "eqeqeq": true,
+  "forin": true,
+  "immed": true,
+  "loopfunc": false,
+  "noempty": true,
+  "nonew": true,
+  "plusplus": false,
+  "newcap": true,
+  "trailing": true,
+  "unused": "vars",
+  "undef": true,
+  // Relaxing options
+  "globalstrict": true,
+  "strict": false,
+  "asi": false,
+  "boss": false,
+  "debug": false,
+  "sub": true,
+  // Predefine
+  "predef": {
+  }
+}
