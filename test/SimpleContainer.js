@@ -9,13 +9,81 @@ describe('SimpleContainer', function() {
     SimpleContainer.should.be.a.Function;
   });
 
+  it("can resolve by factory binding", function(done) {
+    var container = new SimpleContainer();
+    container.bind('mass', {
+      factory: function() {
+        return 123;
+      }
+    });
+
+    container.get('mass').then(function(data) {
+      data.should.to.equal(123);
+      done();
+    }).fail(done);
+  });
+
+  it("can resolve with Singleton scope", function(done) {
+    var container = new SimpleContainer();
+    container.bind('mass', {
+      scope: 'Singleton',
+      factory: function() {
+        return {value: 123};
+      }
+    });
+
+    container.get(['mass', 'mass']).then(function(data) {
+      data[0].value.should.to.equal(123);
+      data[0].should.to.equal(data[1]);
+      done();
+    }).fail(done);
+  });
+
+  it("can resolve with Transient scope", function(done) {
+    var container = new SimpleContainer();
+    container.bind('mass', {
+      scope: 'Transient',
+      factory: function() {
+        return {value: 123};
+      }
+    });
+
+    container.get(['mass', 'mass']).then(function(data) {
+      data[0].value.should.to.equal(123);
+      data[0].should.to.not.equal(data[1]);
+      done();
+    }).fail(done);
+  });
+
+  it("can resolve with Custom scope", function(done) {
+    var container = new SimpleContainer();
+    var count = 0;
+    container.bind('mass', {
+      scope: function() {
+        count++;
+        return count !== 3;
+      },
+      factory: function() {
+        return {value: 123};
+      }
+    });
+
+    container.get(['mass', 'mass', 'mass', 'mass', 'mass']).then(function(data) {
+      data[0].should.to.equal(data[1]);
+      data[1].should.to.not.equal(data[2]);
+      data[0].should.to.not.equal(data[3]);
+      data[3].should.to.equal(data[4]);
+      done();
+    }).fail(done);
+  });
+
   it("can resolve constant", function(done) {
     var container = new SimpleContainer();
     container.bindConstant('hello', 'world');
     container.get('hello').then(function(data) {
       data.should.to.equal('world');
       done();
-    }, done);
+    }).fail(done);
   });
 
   it("can resolve constant from parent container", function(done) {
@@ -25,7 +93,7 @@ describe('SimpleContainer', function() {
     container.get('kill').then(function(data) {
       data.should.to.equal('roshan');
       done();
-    }, done);
+    }).fail(done);
   });
 
   it("can resolve by array", function(done) {
@@ -37,7 +105,7 @@ describe('SimpleContainer', function() {
       data[0].should.to.equal('world');
       data[1].should.to.equal('roshan');
       done();
-    }, done);
+    }).fail(done);
   });
 
   it("invoke with dependencies", function(done) {
