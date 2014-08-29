@@ -148,6 +148,19 @@ describe('SimpleContainer', function() {
     }).fail(done);
   });
 
+  it("invoke with special name dependecies", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('var/log', 'nginx');
+
+    var target = function(/* var/log */log) {
+      log.should.to.equal('nginx');
+      done();
+    };
+    container.invoke(target, {
+      'var/log': 'nginx'
+    }).fail(done);
+  });
+
   it("try resolve dependencies", function(done) {
     var container = new SimpleContainer();
     container.bindConstant('kill', 'roshan');
