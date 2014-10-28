@@ -20,7 +20,7 @@
       "url": "https://github.com/zealic/node-padma/blob/master/LICENSE-MIT.txt"
     }
   ],
-  "main": "lib/padma",
+  "main": "padma",
   "scripts": {
     "test": "mocha"
   },

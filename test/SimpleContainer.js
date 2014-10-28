@@ -2,7 +2,7 @@ var chai = require("chai");
 var expect = chai.expect;
 chai.should();
 
-var SimpleContainer = require('../lib/padma').SimpleContainer;
+var SimpleContainer = require('../padma').SimpleContainer;
 
 describe('SimpleContainer', function() {
   it("should be a function", function() {
