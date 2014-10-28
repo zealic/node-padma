@@ -38,4 +38,19 @@ describe('PadmaContainer', function() {
       }).fail(done);
     }).fail(done);
   });
+
+  it("bindDirectory - recursives", function(done) {
+    var container = new PadmaContainer();
+    container.bindDirectory(F('bind-directory/recursives')).then(function() {
+      var names = ['hello', 'A/metadata', 'A/B/metadata', 'A/B/C/metadata'];
+      container.resolve(names).then(function(results) {
+        results[0].should.to.be.equals('World!');
+        results[1].name.should.to.be.equals('A');
+        results[2].name.should.to.be.equals('B');
+        results[3].name.should.to.be.equals('C');
+        done();
+      }).fail(done);
+    }).fail(done);
+  });
+
 });
