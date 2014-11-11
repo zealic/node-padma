@@ -25,13 +25,14 @@ describe('SimpleContainer', function() {
 
   it("can resolve with Singleton scope", function(done) {
     var container = new SimpleContainer();
-    container.bind('mass', {
+    var name = container.bind('mass', {
       scope: 'Singleton',
       factory: function() {
         return {value: 123};
       }
     });
 
+    name.should.to.equal('mass');
     container.get(['mass', 'mass']).then(function(data) {
       data[0].value.should.to.equal(123);
       data[0].should.to.equal(data[1]);

@@ -41,8 +41,10 @@ describe('PadmaContainer', function() {
 
   it("bindDirectory - recursives", function(done) {
     var container = new PadmaContainer();
-    container.bindDirectory(F('bind-directory/recursives')).then(function() {
+    container.bindDirectory(F('bind-directory/recursives')).then(function(retNames) {
       var names = ['hello', 'A/metadata', 'A/B/metadata', 'A/B/C/metadata'];
+
+      retNames.should.to.members(names);
       container.resolve(names).then(function(results) {
         results[0].should.to.be.equals('World!');
         results[1].name.should.to.be.equals('A');
