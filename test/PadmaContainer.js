@@ -55,4 +55,13 @@ describe('PadmaContainer', function() {
     }).fail(done);
   });
 
+  it("bindDirectory - default Singleton", function(done) {
+    var container = new PadmaContainer();
+    container.bindDirectory(F('bind-directory/simple')).then(function() {
+      container.get(['default-singleton', 'default-singleton']).then(function(data) {
+        data[0].should.to.equal(data[1]);
+        done();
+      }).fail(done);
+    });
+  });
 });

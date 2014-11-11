@@ -56,6 +56,21 @@ describe('SimpleContainer', function() {
     }).fail(done);
   });
 
+  it("can resolve with Transient scope and $padma meta annoation", function(done) {
+    var container = new SimpleContainer();
+    var factory = function() {
+      return {value: 123};
+    };
+    factory.$padma = {scope: 'Singleton'};
+    container.bind('mass', { factory: factory });
+
+    container.get(['mass', 'mass']).then(function(data) {
+      data[0].value.should.to.equal(123);
+      data[0].should.to.equal(data[1]);
+      done();
+    }).fail(done);
+  });
+
   it("can resolve with Custom scope", function(done) {
     var container = new SimpleContainer();
     var count = 0;

@@ -1,7 +1,7 @@
 {
   "name": "padma",
   "description": "A simple container for Node.js",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/zealic/node-padma",
   "author": {
     "name": "zealic",
