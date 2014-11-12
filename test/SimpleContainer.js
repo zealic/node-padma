@@ -124,6 +124,18 @@ describe('SimpleContainer', function() {
     }).fail(done);
   });
 
+  it("can rebind", function(done) {
+    var container = new SimpleContainer();
+    container.bindConstant('mass', 123);
+
+    container.bindConstant('mass', 333);
+
+    container.get('mass').then(function(data) {
+      data.should.to.equal(333);
+      done();
+    }).fail(done);
+  });
+
   it("invoke with dependencies", function(done) {
     var container = new SimpleContainer();
     container.bindConstant('hello', 'world');
