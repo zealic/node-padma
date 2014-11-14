@@ -102,6 +102,20 @@ describe('SimpleContainer', function() {
     }).fail(done);
   });
 
+  it("can not find binding", function(done) {
+    var parent = new SimpleContainer();
+    var container = new SimpleContainer(parent);
+    container.get('kill').then(function() {
+      done("Must be fail!");
+    }).fail(function(err) {
+      if(err.stack.indexOf('test\\SimpleContainer.js') === -1 &&
+        err.stack.indexOf('test/SimpleContainer.js') === -1 ) {
+        return done(err.toString());
+      }
+      done();
+    });
+  });
+
   it("can resolve constant from parent container", function(done) {
     var parent = new SimpleContainer();
     var container = new SimpleContainer(parent);
