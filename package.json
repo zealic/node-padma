@@ -28,6 +28,8 @@
     "node": ">= 0.10.0"
   },
   "keywords": [
+    "ioc",
+    "inject",
     "container",
     "service-container"
   ],
