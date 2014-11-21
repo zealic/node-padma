@@ -20,7 +20,7 @@ describe('SimpleContainer', function() {
     container.get('mass').then(function(data) {
       data.should.to.equal(123);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve with Singleton scope", function(done) {
@@ -37,7 +37,7 @@ describe('SimpleContainer', function() {
       data[0].value.should.to.equal(123);
       data[0].should.to.equal(data[1]);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve with Transient scope", function(done) {
@@ -53,7 +53,7 @@ describe('SimpleContainer', function() {
       data[0].value.should.to.equal(123);
       data[0].should.to.not.equal(data[1]);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve with Transient scope and $padma meta annoation", function(done) {
@@ -68,7 +68,7 @@ describe('SimpleContainer', function() {
       data[0].value.should.to.equal(123);
       data[0].should.to.equal(data[1]);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve with Custom scope", function(done) {
@@ -90,7 +90,7 @@ describe('SimpleContainer', function() {
       data[0].should.to.not.equal(data[3]);
       data[3].should.to.equal(data[4]);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve constant", function(done) {
@@ -99,7 +99,7 @@ describe('SimpleContainer', function() {
     container.get('hello').then(function(data) {
       data.should.to.equal('world');
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can not find binding", function(done) {
@@ -107,7 +107,7 @@ describe('SimpleContainer', function() {
     var container = new SimpleContainer(parent);
     container.get('kill').then(function() {
       done("Must be fail!");
-    }).fail(function(err) {
+    }).catch(function(err) {
       if(err.stack.indexOf('test\\SimpleContainer.js') === -1 &&
         err.stack.indexOf('test/SimpleContainer.js') === -1 ) {
         return done(err.toString());
@@ -123,7 +123,7 @@ describe('SimpleContainer', function() {
     container.get('kill').then(function(data) {
       data.should.to.equal('roshan');
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can resolve by array", function(done) {
@@ -135,7 +135,7 @@ describe('SimpleContainer', function() {
       data[0].should.to.equal('world');
       data[1].should.to.equal('roshan');
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("can rebind", function(done) {
@@ -147,7 +147,7 @@ describe('SimpleContainer', function() {
     container.get('mass').then(function(data) {
       data.should.to.equal(333);
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("invoke with dependencies", function(done) {
@@ -160,7 +160,7 @@ describe('SimpleContainer', function() {
       kill.should.to.equal('roshan');
       done();
     };
-    container.invoke(target).fail(done);
+    container.invoke(target).catch(done);
   });
 
   it("invoke with local dependencies", function(done) {
@@ -174,7 +174,7 @@ describe('SimpleContainer', function() {
     container.invoke(target, {
       hello: 'world',
       kill: 'roshan'
-    }).fail(done);
+    }).catch(done);
   });
 
   it("invoke with local overrided dependencies", function(done) {
@@ -187,7 +187,7 @@ describe('SimpleContainer', function() {
     };
     container.invoke(target, {
       kill: 'Blade Master'
-    }).fail(done);
+    }).catch(done);
   });
 
   it("invoke with special name dependecies", function(done) {
@@ -200,7 +200,7 @@ describe('SimpleContainer', function() {
     };
     container.invoke(target, {
       'var/log': 'nginx'
-    }).fail(done);
+    }).catch(done);
   });
 
   it("try resolve dependencies", function(done) {
@@ -209,12 +209,12 @@ describe('SimpleContainer', function() {
 
     container.tryResolve('Bible').then(function(result) {
       result.hasOwnProperty('Bible').should.be.false;
-    }).fail(done);
+    }).catch(done);
 
     container.tryResolve(['kill', 'Bible']).then(function(result) {
       result.hasOwnProperty('kill').should.be.true;
       result.hasOwnProperty('Bible').should.be.false;
       done();
-    }).fail(done);
+    }).catch(done);
   });
 });

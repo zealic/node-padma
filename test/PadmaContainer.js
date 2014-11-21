@@ -26,7 +26,7 @@ describe('PadmaContainer', function() {
     container.get('hello').then(function(data) {
       data.should.to.equal('world');
       done();
-    }).fail(done);
+    }).catch(done);
   });
 
   it("bindDirectory - simple", function(done) {
@@ -35,8 +35,8 @@ describe('PadmaContainer', function() {
       container.resolve('hello').then(function(world) {
         world.should.to.be.equals('World!');
         done();
-      }).fail(done);
-    }).fail(done);
+      }).catch(done);
+    }).catch(done);
   });
 
   it("bindDirectory - recursives", function(done) {
@@ -51,8 +51,8 @@ describe('PadmaContainer', function() {
         results[2].name.should.to.be.equals('B');
         results[3].name.should.to.be.equals('C');
         done();
-      }).fail(done);
-    }).fail(done);
+      }).catch(done);
+    }).catch(done);
   });
 
   it("bindDirectory - default Singleton", function(done) {
@@ -61,7 +61,7 @@ describe('PadmaContainer', function() {
       container.get(['default-singleton', 'default-singleton']).then(function(data) {
         data[0].should.to.equal(data[1]);
         done();
-      }).fail(done);
+      }).catch(done);
     });
   });
 });
