@@ -209,12 +209,14 @@ describe('SimpleContainer', function() {
 
     container.tryResolve('Bible').then(function(result) {
       result.hasOwnProperty('Bible').should.be.false;
-    }).catch(done);
-
-    container.tryResolve(['kill', 'Bible']).then(function(result) {
-      result.hasOwnProperty('kill').should.be.true;
-      result.hasOwnProperty('Bible').should.be.false;
-      done();
-    }).catch(done);
+    })
+    .then(function() {
+      return container.tryResolve(['kill', 'Bible']).then(function(result) {
+        result.hasOwnProperty('kill').should.be.true;
+        result.hasOwnProperty('Bible').should.be.false;
+        done();
+      });
+    })
+    .catch(done);
   });
 });

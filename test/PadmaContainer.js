@@ -45,11 +45,11 @@ describe('PadmaContainer', function() {
       var names = ['hello', 'A/metadata', 'A/B/metadata', 'A/B/C/metadata'];
 
       retNames.should.to.members(names);
-      container.resolve(names).then(function(results) {
-        results[0].should.to.be.equals('World!');
-        results[1].name.should.to.be.equals('A');
-        results[2].name.should.to.be.equals('B');
-        results[3].name.should.to.be.equals('C');
+      container.resolve(names).spread(function(a, b, c, d) {
+        a.should.to.be.equals('World!');
+        b.name.should.to.be.equals('A');
+        c.name.should.to.be.equals('B');
+        d.name.should.to.be.equals('C');
         done();
       }).catch(done);
     }).catch(done);
