@@ -64,4 +64,17 @@ describe('PadmaContainer', function() {
       }).catch(done);
     });
   });
+
+  it("bindDirectory - cycle dependencies", function(done) {
+    done();
+    var container = new PadmaContainer();
+    container.bindDirectory(F('bind-directory/cycle-depencencies')).then(function() {
+      container.get('head').then(function() {
+        done('Must throw error!');
+      }).catch(function(err) {
+        err.message.indexOf('cycle dependency').should.to.not.equal(-1);
+        done();
+      }).catch(done);
+    });
+  });
 });
